@@ -1,0 +1,47 @@
+<div class="main-container">
+  <div class="input-field">
+    <!-- <img src="../../assets/pattern-bg.png" alt="" /> -->
+    <div class="input-container">
+      <label for="">IP Address Tracker</label>
+      <input type="text" [(ngModel)]="ipValue" />
+      <button type="submit" (click)="onSubmit()"><span>></span></button>
+    </div>
+  </div>
+
+  <div  class="data-container">
+    <div class="data ip">
+      <p class="title">IP ADDRESS</p>
+      <h2 class="dec">{{ data.ip }}</h2>
+    </div>
+    <div class="data location">
+      <p class="title">LOCATION</p>
+      <h2 *ngIf="data.location.region != ''" class="dec">
+        {{ data.location.region }}, {{ data.location.country }}
+      </h2>
+    </div>
+    <div class="data time-zone">
+      <p class="title">TIME ZONE</p>
+      <h2 class="dec">{{ data.location.timezone }}</h2>
+    </div>
+    <div class="data isp">
+      <p class="title">ISP</p>
+      <h2 class="dec">{{ data.isp }}</h2>
+    </div>
+  </div>
+
+  <div class="map">
+    <google-map
+      height="500px"
+      width="100%"
+      [center]="center"
+      [zoom]="zoom"
+      >
+      <map-marker *ngIf="markerPosition[0]"
+      #marker="mapMarker"
+        [position]="markerPosition[0]"
+        (mapClick)="openInfoWindow(marker)"
+      ></map-marker>
+      <map-info-window>Info Window content</map-info-window>
+    </google-map>
+  </div>
+</div>
